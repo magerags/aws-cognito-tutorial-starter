@@ -18,14 +18,34 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 library.add(faEdit);
 
 class App extends Component {
+  
+  state = {
+    isAuthenticated: false,
+    user: null
+  }
+
+  setAuthStatus = authenticated => {
+    this.setState({ isAuthenticated: authenticated});
+  }
+
+  setUser = user => {
+    this.setState({ user: user });
+  }
+
   render() {
+    const authProps = {
+      isAuthenticated: this.state.isAuthenticated,
+      user: this.state.user,
+      setAuthStatus: this.setAuthStatus,
+      setUser: this.setUser
+    }
     return (
       <div className="App">
         <Router>
           <div>
-            <Navbar />
+            <Navbar auth={authProps} />
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
               <Route exact path="/products" component={Products} />
               <Route exact path="/admin" component={ProductAdmin} />
               <Route exact path="/login" component={LogIn} />
