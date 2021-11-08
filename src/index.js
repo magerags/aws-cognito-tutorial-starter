@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import 'bulma/css/bulma.min.css';
 import './index.css';
 import App from './App';
+import Amplify from 'aws-amplify';
+import config from './config'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
